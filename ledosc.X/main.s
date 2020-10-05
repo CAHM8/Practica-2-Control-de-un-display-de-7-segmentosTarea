@@ -184,8 +184,9 @@ resetvec:
     ;COdigo principal
     PSECT code
     main:
-    BANKSEL ANSELH
-    CLRF ANSELH
+    BANSEL ANSEL 
+    movlw 0x00 
+    movwf ANSEL
     BANKSEL PORTA 
     clrf PORTA
     BANKSEL TRISA
