@@ -191,7 +191,7 @@ resetvec:
     BANKSEL TRISA
     clrf TRISA
     BANKSEL OSCCON
-    movlw   0b01100001 ;seleccionamos el oscilador interno de 4MHz    
+    movlw   0b01100101 ;seleccionamos el oscilador interno de 4MHz    
     movwf   OSCCON
     
 ;cambios de numero en pantalla
