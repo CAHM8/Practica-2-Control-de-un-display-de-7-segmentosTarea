@@ -1,8 +1,8 @@
 PROCESSOR 16F887 ;aqui declaramos el microcontrolador
     
     #include <xc.inc>   ;incluimos la libreria
-    CONFIG FOSC=INTRC_NOCLKOUT 
-  
+    CONFIG FOSC=INTRC_NOCLKOUT ;se selecciona el osc
+ 
     CONFIG WDTE=OFF
     CONFIG PWRTE=ON
     CONFIG MCLRE=OFF
@@ -29,6 +29,7 @@ resetvec:
     PAGESEL main
     goto main
     
+    ;registro de bits de encendido
     PSECT code
  num0:
     BANKSEL PORTA 
@@ -124,7 +125,7 @@ resetvec:
     nop
     PAGESEL main
     return
-    ;este espacio en blanco est· colocado al proposito
+    ;este espacio en blanco est√° colocado al proposito
     PSECT code
  num8:
     BANKSEL PORTA 
@@ -149,6 +150,7 @@ resetvec:
     PAGESEL main
     return
     
+    ;conteo-"timer" 500ms
     PSECT code
  pausa:
     bcf STATUS,6
@@ -179,7 +181,7 @@ resetvec:
     nop
     return
     
-    
+    ;COdigo principal
     PSECT code
     main:
     BANKSEL PORTA 
@@ -187,12 +189,10 @@ resetvec:
     BANKSEL TRISA
     clrf TRISA
     BANKSEL OSCCON
-    movlw   0x71    
+    movlw   0b01100001 ;seleccionamos el oscilador interno de 4MHz    
     movwf   OSCCON
     
-    movlw 0b00000000
-    movwf PORTA
-    nop
+;cambios de numero en pantalla
     loop:
     PAGESEL num0
     call num0
